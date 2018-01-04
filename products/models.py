@@ -27,7 +27,7 @@ class Product(models.Model):
 
 class ProductImage(models.Model):
 	product = models.ForeignKey(Product, blank = True, null = True, default = None)
-	categoty = models.ForeignKey(Category, blank = True, null = True, default = None)
+	category = models.ForeignKey(Category, blank = True, null = True, default = None)
 	image = models.ImageField()
 	is_main = models.BooleanField(default = False)
 	is_active = models.BooleanField(default = True)

@@ -10,7 +10,7 @@
           <h1 class="my-4">Category</h1>
           <div class="list-group">
             {% for c in category %}
-            <a href="#" class="list-group-item">{{c.name}}</a>
+            <a href="{% url 'category_filter' c_id=c.id %}" class="list-group-item">{{c.name}}</a>
             {% endfor %}
           </div>
 

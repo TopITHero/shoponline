@@ -19,3 +19,13 @@ def detail(request,pk):
 
 	return render(request, 'product_detail.html',{ 'product': product,'category':category,})
 
+def category_filter(request,c_id):
+	category = Category.objects.all()
+	products = ProductImage.objects.filter(is_active = True, is_main = True, category_id = c_id)
+	main = ProductImage.objects.filter(is_active = True, is_main = True,category_id = c_id)[:3]
+	session_key = request.session.session_key
+	if not session_key:
+		request.session.cycle_key()
+	print(request.session.session_key)
+	return render(request, 'products.html', {'products':products,'category':category, 'main':main})
+
