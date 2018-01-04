@@ -8,6 +8,10 @@ class Status(models.Model):
 	created = models.DateTimeField(auto_now_add = True, auto_now = False)
 	updated = models.DateTimeField(auto_now_add = False, auto_now = True)
 
+	def __str__(self):
+
+		return self.name
+
 
 
 class Order(models.Model):
@@ -34,8 +38,8 @@ class ProductInOrder(models.Model):
 	product = models.ForeignKey(Product, blank = True, null = True, default = None)
 	is_active = models.BooleanField(default = True)
 	number = models.IntegerField(default = 1)
-	itemprice = models.DecimalField(max_digits = 10, decimal_places = 5, default = 0)
-	totalprice = models.DecimalField(max_digits = 10, decimal_places = 5, default = 0)
+	itemprice = models.DecimalField(max_digits = 10, decimal_places = 2, default = 0)
+	totalprice = models.DecimalField(max_digits = 10, decimal_places = 2, default = 0)
 	created = models.DateTimeField(auto_now_add = True, auto_now = False)
 	updated = models.DateTimeField(auto_now_add = False, auto_now = True)
 
@@ -62,13 +66,14 @@ def products_in_order_post_save(sender,instance,created,**kwargs):
 post_save.connect(products_in_order_post_save,sender = ProductInOrder)	
 
 
-class ProductInBacket(models.Model):
+class BuyingProduct(models.Model):
 	session_key = models.CharField(max_length = 250)
+	Order = models.ForeignKey(Order, blank = True, null = True, default = None)
 	product = models.ForeignKey(Product, blank = True, null = True, default = None)
 	is_active = models.BooleanField(default = True)
-	number = models.IntegerField(default = 1)
-	itemprice = models.DecimalField(max_digits = 10, decimal_places = 5, default = 0)
-	totalprice = models.DecimalField(max_digits = 10, decimal_places = 5, default = 0)
+	numb = models.IntegerField(default = 1)
+	itemprice = models.DecimalField(max_digits = 10, decimal_places = 2, default = 0)
+	totalprice = models.DecimalField(max_digits = 10, decimal_places = 2, default = 0)
 	created = models.DateTimeField(auto_now_add = True, auto_now = False)
 	updated = models.DateTimeField(auto_now_add = False, auto_now = True)
 
@@ -78,8 +83,13 @@ class ProductInBacket(models.Model):
 
 
 	def save(self, *args, **kwargs):
+		
 		itemprice = self.product.price 
+		
 		self.itemprice = itemprice
-		self.totalprice = int(self.number)*self.itemprice
+		
+		self.totalprice = int(self.numb)*self.itemprice
 
-		super(ProductInBacket,self).save(*args, **kwargs)	
+		super(BuyingProduct,self).save(*args, **kwargs)	
+
+

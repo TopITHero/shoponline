@@ -3,9 +3,11 @@ from .models import *
 # Register your models here.
 
 class ProductInOrderInline(admin.TabularInline):
+	
 	model = ProductInOrder
 
 class ProductInOrderAdmin(admin.ModelAdmin):
+	list_display = [field.name for field in ProductInOrder._meta.fields if field.name != "id"]
 
 	class Meta:
 		model = ProductInOrder
@@ -13,6 +15,7 @@ class ProductInOrderAdmin(admin.ModelAdmin):
 admin.site.register(ProductInOrder,ProductInOrderAdmin)
 
 class StatusAdmin(admin.ModelAdmin):
+	list_display = [field.name for field in Status._meta.fields if field.name != "id"]
 
 	class Meta:
 		model = Status
@@ -20,6 +23,7 @@ class StatusAdmin(admin.ModelAdmin):
 admin.site.register(Status,StatusAdmin)
 
 class OrderAdmin(admin.ModelAdmin):
+	list_display = [field.name for field in Order._meta.fields if field.name != "id"]
 
 	inlines = [ProductInOrderInline]
 	class Meta:
@@ -29,9 +33,10 @@ admin.site.register(Order,OrderAdmin)
 
 
 
-class ProductInBacketAdmin(admin.ModelAdmin):
+class BuyingProductAdmin(admin.ModelAdmin):
+	list_display = [field.name for field in BuyingProduct._meta.fields if field.name != "id"]
 
 	class Meta:
-		model = ProductInBacket
+		model = BuyingProduct
 
-admin.site.register(ProductInBacket,ProductInBacketAdmin)
+admin.site.register(BuyingProduct,BuyingProductAdmin)

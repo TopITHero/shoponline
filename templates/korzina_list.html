@@ -1,0 +1,10 @@
+<a class="nav-link" style = "color:red" href="#">Buy<span id="product_total_numb">({{product_total_numb}})</span></a>
+<ul id = "myitems" class="myitems hidden">
+{% for product in buying_products %}
+		<li>{{product.product.name}} {{product.numb}} {{product.totalprice}}
+		<button id="delete_btn" class="btn btn-default" href="{% url 'delete' pk=product.pk %}" style="color: red;">
+		Delete
+		</button>
+		</li>
+{% endfor %}
+</ul>

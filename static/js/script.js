@@ -7,23 +7,49 @@ $(document).ready(function(){
 		var numb = $('#number').val();
 		var submit_btn = $("#submit_btn");
 		var product_id = submit_btn.data("product_id");
-		var product_name = submit_btn.data("product_name");
-		var product_price = submit_btn.data("product_price")
-
 		data = {};
 
 		data.product_id = product_id;
 		
 		data.numb = numb;
 
+		var  csrf_token = $('#form_buy_product input[name ="csrfmiddlewaretoken"]').val(); 
+		
+		var url = $("#form_buy_product").attr("action");
+		data['csrfmiddlewaretoken'] = csrf_token
+		
+		$.ajax({
+			url: url,
+			type: 'POST',
+			data: data,
+			cache:true,
+			success: function(json){
+					console.log(json);
+					$("#buyproduct").html(json);
+			}
+		});
+
+		$("li").on("click", ".btn", function(event){
+			event.preventDefault();
+			console.log("delete")
+			var close = $(this).parent();
+			$.ajax({
+				url: $(this).attr("href"),
+				type: 'DELETE',
+				data: {
+					'delete': true,
+				},
+				success: function(json) {
+					$("#buyproduct").html(json);
+					close.fadeOut(1000);
+				}
+			});
+		});	
 
 
 		
 		
-		$("#myitems").append("<li>"+ product_name + "," + numb + "," + product_price +
-			"<a class='delete-item' href=''>x</a>" +
-		 "</li>");
-
+		
 	});
 	$("#buyproduct").click(function(){
         $("#myitems").toggle();
