@@ -34,13 +34,12 @@
               <a class="nav-link" href="{% url 'products' %}">Home
                 <span class="sr-only">(current)</span>
               </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'social:begin' 'facebook' %}">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Services</a>
-            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link"  href="{% url 'home' %}">Profile</a></li>
+            <li class="nav-item"><a class="nav-link"  href="{% url 'logout' %}">Log out</a></li>
+            {% else %}
+            <li class="nav-item"><a class="nav-link"  href="{% url 'login' %}">Log in</a></li>
+            {% endif %}
             <li id = "buyproduct" class="nav-item buy">
               
                 {% include 'korzina_list.html' %}  
