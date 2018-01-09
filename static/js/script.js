@@ -1,7 +1,4 @@
 $(document).ready(function(){
-	$("#myitems").toggle();
-
-	
 	$("#form_buy_product").on('submit',function(event){
 		event.preventDefault();
 		var numb = $('#number').val();
@@ -24,7 +21,7 @@ $(document).ready(function(){
 			data: data,
 			cache:true,
 			success: function(json){
-					console.log(json);
+					
 					$("#buyproduct").html(json);
 			}
 		});
@@ -56,9 +53,5 @@ $(document).ready(function(){
 
     });
 
-    $(document).on('click', '.delete-item', function(event){
-    	event.preventDefault();
-    	$(this).closest("li").remove();
-    	$("#myitems").toggle();	
-    });
+    
 });

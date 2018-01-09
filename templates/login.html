@@ -1,13 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
-  <br>
-  <p><strong>-- OR --</strong></p>
-  <a href="{% url 'social:begin' 'facebook' %}">Login with facebook</a><br>
+<div class="container loginform">
+	<div class="row">
+		<div class="col-md-4 offset-md-2">
+			<form class="form-signin" action="{% url 'login' %}" method="post" id="login-form">{% csrf_token %}
+				<h2 class="form-signin-heading">{{ message }}</h2>
+				<label for="id_username" class="sr-only">Email address</label>
+				<input type="text" name="username" id="id_username" class="form-control" placeholder="User Name" required autofocus>
+				<label for="id_password" class="sr-only">Password</label>
+				<input type="password" name="password" id="id_password" class="form-control" placeholder="Password" required>
+				<div class="checkbox">
+				<label>
+				<input type="checkbox" value="remember-me"> Remember me
+				</label>
+				</div>
+				<button class="btn btn-lg btn-primary btn-success" type="submit">Log in</button>
+			</form>
+		</div>
+		<div class="col-md-4 offset-md-2">
+			<a href="{% url 'social:begin' 'facebook' %}" class="fa fa-facebook"></a>
+		</div>
+		
+	</div>
+</div> <!-- /container -->
+	
+
+  
 {% endblock %}
