@@ -1,6 +1,26 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-  <h2>Homepage</h2>
-  <p>Hello {{ user.username }}!</p>
+	<div class="container ">
+		<div class="row">
+			<div class="jumbotron wantucenter">
+				<h2>Homepage</h2>
+				  <p>Hello {{ user.username }}!</p>
+				<ul>
+				{% if buying_products %}	
+					{% for product in buying_products %}
+							<li>{{product.product.name}} {{product.numb}} {{product.totalprice}}
+							
+							</li>
+					{% endfor %}
+				{% else %}
+					<li>No Products</li>
+				{% endif %}		
+				</ul>
+			</div>	
+		</div>
+	</div>
+{% endblock %}
+{% block js %}
+<script src="{% static 'js/script.js' %}"></script>
 {% endblock %}

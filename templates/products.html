@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
     <!-- Page Content -->
     <div class="container">
@@ -74,3 +75,7 @@
     </div>
     <!-- /.container -->
 {% endblock %}
+
+    {% block js %}
+    <script src="{% static 'js/script.js' %}"></script>
+    {% endblock %}

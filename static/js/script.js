@@ -26,22 +26,22 @@ $(document).ready(function(){
 			}
 		});
 
-		$("li").on("click", ".btn", function(event){
-			event.preventDefault();
-			console.log("delete")
-			var close = $(this).parent();
-			$.ajax({
-				url: $(this).attr("href"),
-				type: 'DELETE',
-				data: {
-					'delete': true,
-				},
-				success: function(json) {
-					$("#buyproduct").html(json);
-					close.fadeOut(1000);
-				}
-			});
-		});	
+	$("li").on("click", ".btn", function(event){
+		event.preventDefault();
+		console.log("delete")
+		var close = $(this).parent();
+		$.ajax({
+			url: $(this).attr("href"),
+			type: 'DELETE',
+			data: {
+				'delete': true,
+			},
+			success: function(json) {
+				$("#buyproduct").html(json);
+				close.fadeOut(1000);
+			}
+		});
+	});	
 
 
 		

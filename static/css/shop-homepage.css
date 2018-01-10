@@ -62,3 +62,9 @@ background-image : url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www
 input {
 	margin-bottom: 20px;
 }
+
+
+.wantucenter {
+  margin: 0 auto;
+  width: 500px;
+}
